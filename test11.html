@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+
+<html lang="ko">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>주머니요정의 주린이 성장노트 🌱</title>
+
+  <style>
+
+    :root {
+
+      --primary: #FF7E67;
+
+      --primary-light: #FFF0EE;
+
+      --secondary: #4ECDC4;
+
+      --secondary-light: #E8FAF8;
+
+      --yellow: #FFD166;
+
+      --yellow-light: #FFF9E6;
+
+      --purple: #A29BFE;
+
+      --purple-light: #F3F1FF;
+
+      --bg: #F8F9FD;
+
+      --card-bg: #FFFFFF;
+
+      --text: #2D3436;
+
+      --text-muted: #8395A7;
+
+      --radius: 20px;
+
+    }
+
+
+
+    * {
+
+      box-sizing: border-box;
+
+      margin: 0;
+
+      padding: 0;
+
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+
+      -webkit-tap-highlight-color: transparent;
+
+    }
+
+
+
+    body {
+
+      background-color: var(--bg);
+
+      color: var(--text);
+
+      display: flex;
+
+      justify-content: center;
+
+      padding-bottom: 70px;
+
+    }
+
+
+
+    .app-container {
+
+      width: 100%;
+
+      max-width: 440px;
+
+      min-height: 100vh;
+
+      background-color: var(--card-bg);
+
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+
+      position: relative;
+
+    }
+
+
+
+    /* 상단 배너 */
+
+    .header {
+
+      background: linear-gradient(135deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%);
+
+      padding: 24px 20px 20px;
+
+      color: white;
+
+      border-bottom-left-radius: 28px;
+
+      border-bottom-right-radius: 28px;
+
+    }
+
+    .header-top {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-bottom: 12px;
+
+    }
+
+    .header h1 {
+
+      font-size: 20px;
+
+      font-weight: 800;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+    }
+
+    .market-badge {
+
+      background: rgba(255, 255, 255, 0.25);
+
+      padding: 4px 10px;
+
+      border-radius: 20px;
+
+      font-size: 11px;
+
+      font-weight: bold;
+
+      backdrop-filter: blur(4px);
+
+    }
+
+    .header-desc {
+
+      font-size: 13px;
+
+      opacity: 0.95;
+
+      line-height: 1.4;
+
+    }
+
+
+
+    /* 탭 네비게이션 */
+
+    .tab-bar {
+
+      display: flex;
+
+      background: #F1F3F9;
+
+      margin: 16px 16px 0;
+
+      padding: 4px;
+
+      border-radius: 16px;
+
+      gap: 4px;
+
+    }
+
+    .tab-btn {
+
+      flex: 1;
+
+      padding: 10px 0;
+
+      border: none;
+
+      background: none;
+
+      border-radius: 12px;
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      color: var(--text-muted);
+
+      cursor: pointer;
+
+      transition: all 0.2s ease;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 2px;
+
+    }
+
+    .tab-btn.active {
+
+      background: white;
+
+      color: var(--primary);
+
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+
+    }
+
+
+
+    /* 메인 컨텐츠 영역 */
+
+    .content-section {
+
+      display: none;
+
+      padding: 16px;
+
+    }
+
+    .content-section.active {
+
+      display: block;
+
+      animation: fadeIn 0.25s ease;
+
+    }
+
+    @keyframes fadeIn {
+
+      from { opacity: 0; transform: translateY(6px); }
+
+      to { opacity: 1; transform: translateY(0); }
+
+    }
+
+
+
+    /* 공통 카드 스타일 */
+
+    .card {
+
+      background: white;
+
+      border: 1.5px solid #F0F2F6;
+
+      border-radius: var(--radius);
+
+      padding: 18px;
+
+      margin-bottom: 16px;
+
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+
+    }
+
+    .card-title {
+
+      font-size: 15px;
+
+      font-weight: 800;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      margin-bottom: 12px;
+
+    }
+
+
+
+    /* 폼 요소 */
+
+    .input-group {
+
+      margin-bottom: 12px;
+
+    }
+
+    .input-label {
+
+      font-size: 12px;
+
+      font-weight: 700;
+
+      color: #636E72;
+
+      margin-bottom: 6px;
+
+      display: block;
+
+    }
+
+    .input-field {
+
+      width: 100%;
+
+      padding: 12px 14px;
+
+      border-radius: 12px;
+
+      border: 1.5px solid #E2E8F0;
+
+      font-size: 14px;
+
+      outline: none;
+
+      transition: border-color 0.2s;
+
+    }
+
+    .input-field:focus {
+
+      border-color: var(--primary);
+
+    }
+
+
+
+    /* 버튼 */
+
+    .action-btn {
+
+      width: 100%;
+
+      padding: 13px;
+
+      border-radius: 14px;
+
+      border: none;
+
+      background: var(--primary);
+
+      color: white;
+
+      font-size: 14px;
+
+      font-weight: 800;
+
+      cursor: pointer;
+
+      box-shadow: 0 4px 12px rgba(255, 126, 103, 0.3);
+
+      transition: transform 0.1s;
+
+    }
+
+    .action-btn:active {
+
+      transform: scale(0.98);
+
+    }
+
+
+
+    /* 결과 박스 */
+
+    .result-box {
+
+      margin-top: 14px;
+
+      padding: 14px;
+
+      border-radius: 14px;
+
+      background: var(--primary-light);
+
+      display: none;
+
+    }
+
+    .result-row {
+
+      display: flex;
+
+      justify-content: space-between;
+
+      font-size: 13px;
+
+      margin-bottom: 6px;
+
+    }
+
+    .result-highlight {
+
+      font-weight: 800;
+
+      font-size: 16px;
+
+      color: var(--primary);
+
+    }
+
+
+
+    /* 주식 용어 사전 */
+
+    .search-input {
+
+      width: 100%;
+
+      padding: 12px 16px;
+
+      border-radius: 16px;
+
+      border: 1.5px solid #E2E8F0;
+
+      font-size: 14px;
+
+      margin-bottom: 14px;
+
+      outline: none;
+
+      background: #F8F9FD url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%238395a7' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E") no-repeat calc(100% - 14px) center;
+
+    }
+
+    .dict-item {
+
+      background: white;
+
+      border: 1.5px solid #EDF2F7;
+
+      border-radius: 14px;
+
+      padding: 12px 14px;
+
+      margin-bottom: 8px;
+
+    }
+
+    .dict-word {
+
+      font-weight: 800;
+
+      font-size: 14px;
+
+      color: #2D3436;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      margin-bottom: 4px;
+
+    }
+
+    .dict-desc {
+
+      font-size: 12px;
+
+      color: #636E72;
+
+      line-height: 1.45;
+
+    }
+
+
+
+    /* 칩 버튼 */
+
+    .chip-group {
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 6px;
+
+      margin-bottom: 12px;
+
+    }
+
+    .chip {
+
+      padding: 6px 12px;
+
+      border-radius: 20px;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      background: #F1F3F9;
+
+      color: #636E72;
+
+      cursor: pointer;
+
+      border: none;
+
+    }
+
+    .chip.active {
+
+      background: var(--secondary);
+
+      color: white;
+
+    }
+
+
+
+    /* 명언/인물 카드 */
+
+    .quote-card {
+
+      background: var(--yellow-light);
+
+      border-left: 4px solid var(--yellow);
+
+      padding: 12px 14px;
+
+      border-radius: 12px;
+
+      margin-bottom: 10px;
+
+      font-size: 12px;
+
+      line-height: 1.5;
+
+    }
+
+    .quote-author {
+
+      font-weight: 800;
+
+      color: #D48806;
+
+      margin-bottom: 2px;
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+
+
+<div class="app-container">
+
+  <!-- 상단 요정 헤더 -->
+
+  <header class="header">
+
+    <div class="header-top">
+
+      <h1>🧚 ♀️ 주린이 성장노트</h1>
+
+      <span class="market-badge" id="marketStatus">미국장 휴장중 🌙</span>
+
+    </div>
+
+    <p class="header-desc">어려운 주식 이야기? 주머니 요정이 <br>세상에서 제일 쉽게 떠먹여 줄게요! 🍯</p>
+
+  </header>
+
+
+
+  <!-- 상단 탭 버튼 -->
+
+  <nav class="tab-bar">
+
+    <button class="tab-btn active" onclick="switchTab('calc')">
+
+      <span>🧮</span><span>요술 계산기</span>
+
+    </button>
+
+    <button class="tab-btn" onclick="switchTab('dict')">
+
+      <span>📖</span><span>쉬운 사전</span>
+
+    </button>
+
+    <button class="tab-btn" onclick="switchTab('sector')">
+
+      <span>🗺️</span><span>테마 지도</span>
+
+    </button>
+
+    <button class="tab-btn" onclick="switchTab('master')">
+
+      <span>👑</span><span>투자 거장들</span>
+
+    </button>
+
+  </nav>
+
+
+
+  <!-- 탭 1: 계산기 모음 -->
+
+  <section id="tab-calc" class="content-section active">
+
+    
+
+    <!-- 1. 물타기 계산기 -->
+
+    <div class="card">
+
+      <div class="card-title">💧 눈물의 물타기 요정</div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">더 사면 내 평단가가 얼마나 예뻐질까?</p>
+
+      
+
+      <div style="display: flex; gap: 8px;">
+
+        <div class="input-group" style="flex: 1;">
+
+          <label class="input-label">내 현재 평단 (원)</label>
+
+          <input type="number" id="curPrice" class="input-field" placeholder="예: 70000">
+
+        </div>
+
+        <div class="input-group" style="flex: 1;">
+
+          <label class="input-label">보유 주식수 (주)</label>
+
+          <input type="number" id="curQty" class="input-field" placeholder="예: 10">
+
+        </div>
+
+      </div>
+
+
+
+      <div style="display: flex; gap: 8px;">
+
+        <div class="input-group" style="flex: 1;">
+
+          <label class="input-label">추가 매수가 (원)</label>
+
+          <input type="number" id="addPrice" class="input-field" placeholder="예: 55000">
+
+        </div>
+
+        <div class="input-group" style="flex: 1;">
+
+          <label class="input-label">추가 수량 (주)</label>
+
+          <input type="number" id="addQty" class="input-field" placeholder="예: 5">
+
+        </div>
+
+      </div>
+
+
+
+      <button class="action-btn" onclick="calcAverageDown()">새로운 평단가 확인하기 ✨</button>
+
+
+
+      <div id="avgResult" class="result-box">
+
+        <div class="result-row">
+
+          <span>새로운 평단가</span>
+
+          <span class="result-highlight" id="resAvgPrice">0원</span>
+
+        </div>
+
+        <div class="result-row">
+
+          <span>총 보유 수량</span>
+
+          <span id="resTotalQty">0주</span>
+
+        </div>
+
+        <div class="result-row" style="font-size: 11px; color: #E17055; margin-top: 6px;">
+
+          <span id="resEscapeRate">탈출까지 OO%만 반등하면 돼요! 🚀</span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- 2. 커피값 복리 계산기 -->
+
+    <div class="card">
+
+      <div class="card-title">☕ 커피값 모아 주식 샀다면?</div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">스노우볼 효과! 소소한 낭비의 대반전 ☃️</p>
+
+      
+
+      <div class="input-group">
+
+        <label class="input-label">하루 아낄 금액</label>
+
+        <div class="chip-group">
+
+          <button class="chip active" onclick="setCoffeeVal(5000, this)">커피 1잔 (5천원)</button>
+
+          <button class="chip" onclick="setCoffeeVal(15000, this)">배달 1번 (1.5만원)</button>
+
+          <button class="chip" onclick="setCoffeeVal(30000, this)">술자리 1번 (3만원)</button>
+
+        </div>
+
+        <input type="hidden" id="dailySave" value="5000">
+
+      </div>
+
+
+
+      <div class="input-group">
+
+        <label class="input-label">투자 기간 선택</label>
+
+        <select id="investYears" class="input-field">
+
+          <option value="3">3년 동안 꾸준히</option>
+
+          <option value="5" selected>5년 동안 꾸준히</option>
+
+          <option value="10">10년 동안 꾸준히 (강력추천)</option>
+
+        </select>
+
+      </div>
+
+
+
+      <button class="action-btn" style="background: var(--secondary);" onclick="calcCompound()">미래 내 통장 훔쳐보기 🔮</button>
+
+
+
+      <div id="compoundResult" class="result-box" style="background: var(--secondary-light);">
+
+        <div class="result-row">
+
+          <span>원금 합계</span>
+
+          <span id="resBaseMoney">0원</span>
+
+        </div>
+
+        <div class="result-row">
+
+          <span>연 10%(S&P500) 굴렸을 때</span>
+
+          <span class="result-highlight" style="color: #00B894;" id="resCompoundMoney">0원</span>
+
+        </div>
+
+        <div style="font-size: 11px; color: #00B894; margin-top: 6px;" id="resBonusComment">
+
+          무려 OOO만원의 공짜 이자가 생겨요! 🎉
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+  </section>
+
+
+
+  <!-- 탭 2: 쉬운 용어 사전 -->
+
+  <section id="tab-dict" class="content-section">
+
+    <input type="text" id="dictSearch" class="search-input" placeholder="궁금한 단어 검색 (예: ETF, RSI, 볼린저)" onkeyup="filterDict()">
+
+    
+
+    <div id="dictList">
+
+      <div class="dict-item" data-word="ETF 상장지수펀드">
+
+        <div class="dict-word">🧺 ETF (상장지수펀드)</div>
+
+        <div class="dict-desc">과일 바구니 같은 거예요! 딸기, 바나나, 사과를 한 알씩 사기 힘들 때 모둠 과일 세트 1팩을 통째로 사는 것과 같아요.</div>
+
+      </div>
+
+
+
+      <div class="dict-item" data-word="일봉 주봉 월봉 캔들 차트">
+
+        <div class="dict-word">🕯️ 일봉 / 주봉 / 월봉</div>
+
+        <div class="dict-desc">하루(일), 일주일(주), 한 달(월) 동안 주가가 어떻게 춤췄는지 보여주는 캔들 모양의 기록 일기장이에요.</div>
+
+      </div>
+
+
+
+      <div class="dict-item" data-word="RSI 과매수 과매도">
+
+        <div class="dict-word">🌡️ RSI (상대강도지수)</div>
+
+        <div class="dict-desc">주식 시장의 온도계! 70도가 넘어가면 "사람들이 너무 흥분해서 과열됐다(팔 때)", 30도 밑이면 "너무 추워서 바닥이다(살 때)"를 뜻해요.</div>
+
+      </div>
+
+
+
+      <div class="dict-item" data-word="볼린저밴드 변동성">
+
+        <div class="dict-word">🛣️ 볼린저밴드</div>
+
+        <div class="dict-desc">주가가 달리는 도로의 가드레일이에요. 주가의 95%는 도로 안에서만 움직이므로, 도로 밖으로 튀어나가면 다시 안으로 돌아오려는 성질이 있어요.</div>
+
+      </div>
+
+
+
+      <div class="dict-item" data-word="네마녀의날 선물옵션동시만기일">
+
+        <div class="dict-word">🧙 ♀️ 네 마녀의 날</div>
+
+        <div class="dict-desc">주식 선물, 옵션 등 4가지 금융 파생상품의 만기일이 겹치는 날이에요. 마녀 4명이 빗자루를 타고 날뛰듯 주가가 출렁여서 붙은 별명이랍니다! (3·6·9·12월 둘째 주 목요일)</div>
+
+      </div>
+
+
+
+      <div class="dict-item" data-word="골든크로스 데드크로스 이평선">
+
+        <div class="dict-word">✨ 골든크로스</div>
+
+        <div class="dict-desc">최근 단기 달리기 속도가 과거 평균 속도를 번쩍 뚫고 올라가는 순간! 상승 신호로 자주 쓰여요.</div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- 탭 3: 대표 테마 지도 -->
+
+  <section id="tab-sector" class="content-section">
+
+    <div class="card">
+
+      <div class="card-title">🗺️ 국장 핵심 테마 & 대장주</div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">잡주 말고 각 산업을 대표하는 진짜 1등 대장주들!</p>
+
+
+
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+
+        <div style="background: var(--purple-light); padding: 12px; border-radius: 12px;">
+
+          <div style="font-weight: 800; font-size: 13px; color: #6C5CE7; margin-bottom: 4px;">🧠 AI & 반도체</div>
+
+          <div style="font-size: 12px; color: #2D3436;">• <strong>대장주:</strong> 삼성전자, SK하이닉스, 한미반도체</div>
+
+          <div style="font-size: 11px; color: var(--text-muted);">미래 모든 전자기기의 두뇌를 만드는 핵심 산업</div>
+
+        </div>
+
+
+
+        <div style="background: var(--secondary-light); padding: 12px; border-radius: 12px;">
+
+          <div style="font-weight: 800; font-size: 13px; color: #00B894; margin-bottom: 4px;">🔋 2차전지 (배터리)</div>
+
+          <div style="font-size: 12px; color: #2D3436;">• <strong>대장주:</strong> LG에너지솔루션, POSCO홀딩스, 에코프로비엠</div>
+
+          <div style="font-size: 11px; color: var(--text-muted);">전기차가 굴러가게 만드는 심장!</div>
+
+        </div>
+
+
+
+        <div style="background: var(--yellow-light); padding: 12px; border-radius: 12px;">
+
+          <div style="font-weight: 800; font-size: 13px; color: #D48806; margin-bottom: 4px;">🛡️ K-방산</div>
+
+          <div style="font-size: 12px; color: #2D3436;">• <strong>대장주:</strong> 한화에어로스페이스, 현대로템, LIG넥스원</div>
+
+          <div style="font-size: 11px; color: var(--text-muted);">전 세계에 탱크, 자주포, 미사일을 수출하는 든든한 방패</div>
+
+        </div>
+
+
+
+        <div style="background: var(--primary-light); padding: 12px; border-radius: 12px;">
+
+          <div style="font-weight: 800; font-size: 13px; color: var(--primary); margin-bottom: 4px;">💊 바이오 & 헬스케어</div>
+
+          <div style="font-size: 12px; color: #2D3436;">• <strong>대장주:</strong> 삼성바이오로직스, 셀트리온, 알테오젠</div>
+
+          <div style="font-size: 11px; color: var(--text-muted);">인류의 질병을 치료하는 바이오시밀러 및 신약 개발</div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- 탭 4: 대가들의 꿀팁 -->
+
+  <section id="tab-master" class="content-section">
+
+    <div class="card">
+
+      <div class="card-title">👑 주식 전설들의 한마디</div>
+
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">흔들리는 멘탈을 꽉 잡아줄 명언 요약집</p>
+
+
+
+      <div class="quote-card">
+
+        <div class="quote-author">🐢 워런 버핏 (가치투자의 아버지)</div>
+
+        "10년 동안 보유할 생각이 없는 주식이라면, 단 10분도 쳐다보지 마세요. 주식 시장은 참을성 없는 사람의 돈을 참을성 있는 사람에게 옮기는 곳입니다."
+
+      </div>
+
+
+
+      <div class="quote-card" style="background: #E8FAF8; border-color: var(--secondary);">
+
+        <div class="quote-author" style="color: #00B894;">🛒 피터 린치 (생활밀착형 투자의 대가)</div>
+
+        "여러분이 쇼핑몰이나 마트에서 가장 자주 보고, 실제로 애용하며 만족하는 제품을 만드는 회사가 바로 최고의 투자처입니다."
+
+      </div>
+
+
+
+      <div class="quote-card" style="background: var(--purple-light); border-color: var(--purple);">
+
+        <div class="quote-author" style="color: #6C5CE7;">📉 앙드레 코스톨라니 (유럽의 전설)</div>
+
+        "주식과 경제는 주인과 산책 나온 강아지 같아요. 강아지가 앞서거니 뒤서거니 까불어도, 결국 주인(기업 가치)을 따라 집에 가게 됩니다."
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+</div>
+
+
+
+<script>
+
+  // 1. 탭 전환 스크립트
+
+  function switchTab(tabId) {
+
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+
+    document.querySelectorAll('.content-section').forEach(sec => sec.classList.remove('active'));
+
+
+
+    event.currentTarget.classList.add('active');
+
+    document.getElementById('tab-' + tabId).classList.add('active');
+
+  }
+
+
+
+  // 2. 물타기 평단가 계산기
+
+  function calcAverageDown() {
+
+    const p1 = parseFloat(document.getElementById('curPrice').value) || 0;
+
+    const q1 = parseFloat(document.getElementById('curQty').value) || 0;
+
+    const p2 = parseFloat(document.getElementById('addPrice').value) || 0;
+
+    const q2 = parseFloat(document.getElementById('addQty').value) || 0;
+
+
+
+    if (q1 <= 0 || q2 <= 0 || p1 <= 0 || p2 <= 0) {
+
+      alert("금액과 수량을 모두 올바르게 입력해주세요! 😊");
+
+      return;
+
+    }
+
+
+
+    const totalMoney = (p1 * q1) + (p2 * q2);
+
+    const totalQty = q1 + q2;
+
+    const newAvg = Math.round(totalMoney / totalQty);
+
+
+
+    document.getElementById('resAvgPrice').innerText = newAvg.toLocaleString() + "원";
+
+    document.getElementById('resTotalQty').innerText = totalQty.toLocaleString() + "주";
+
+    
+
+    // 추가매수가 대비 반등률 계산
+
+    const rebound = (((newAvg - p2) / p2) * 100).toFixed(1);
+
+    document.getElementById('resEscapeRate').innerText = 
+
+      `추가매수가 기준 딱 ${rebound}%만 반등하면 본전 탈출 가능! 🏃💨`;
+
+
+
+    document.getElementById('avgResult').style.display = 'block';
+
+  }
+
+
+
+  // 3. 커피값 복리 계산기
+
+  function setCoffeeVal(val, btn) {
+
+    document.getElementById('dailySave').value = val;
+
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+
+    btn.classList.add('active');
+
+  }
+
+
+
+  function calcCompound() {
+
+    const daily = parseFloat(document.getElementById('dailySave').value) || 5000;
+
+    const years = parseInt(document.getElementById('investYears').value) || 5;
+
+    
+
+    // 월 저축액 (일 * 30일)
+
+    const monthly = daily * 30;
+
+    const months = years * 12;
+
+    const rate = 0.10 / 12; // 연 10% 가정
+
+
+
+    let total = 0;
+
+    for (let i = 0; i < months; i++) {
+
+      total = (total + monthly) * (1 + rate);
+
+    }
+
+
+
+    const baseTotal = monthly * months;
+
+    const profit = Math.round(total - baseTotal);
+
+
+
+    document.getElementById('resBaseMoney').innerText = Math.round(baseTotal).toLocaleString() + "원";
+
+    document.getElementById('resCompoundMoney').innerText = Math.round(total).toLocaleString() + "원";
+
+    document.getElementById('resBonusComment').innerText = 
+
+      `무려 약 ${Math.round(profit / 10000).toLocaleString()}만원의 복리 마법이 생겨요! 🎉`;
+
+
+
+    document.getElementById('compoundResult').style.display = 'block';
+
+  }
+
+
+
+  // 4. 용어 검색 필터
+
+  function filterDict() {
+
+    const query = document.getElementById('dictSearch').value.toLowerCase();
+
+    const items = document.querySelectorAll('.dict-item');
+
+
+
+    items.forEach(item => {
+
+      const text = item.getAttribute('data-word').toLowerCase() + item.innerText.toLowerCase();
+
+      item.style.display = text.includes(query) ? 'block' : 'none';
+
+    });
+
+  }
+
+
+
+  // 5. 미국 증시 서머타임/개장 여부 체크 (간이 알리미)
+
+  function checkMarketClock() {
+
+    const now = new Date();
+
+    const utcHours = now.getUTCHours();
+
+    // 미국 본장: 한국시간 22:30 ~ 05:00 (서머타임 기준 UTC 13:30 ~ 20:00)
+
+    const isUSOpen = (utcHours >= 13 && utcHours < 20);
+
+    const badge = document.getElementById('marketStatus');
+
+    if (isUSOpen) {
+
+      badge.innerText = "미국 본장 개장중 🔥";
+
+      badge.style.background = "rgba(46, 204, 113, 0.4)";
+
+    } else {
+
+      badge.innerText = "미국장 휴장중 🌙";
+
+    }
+
+  }
+
+  checkMarketClock();
+
+</script>
+
+
+
+</body>
+
+</html>
